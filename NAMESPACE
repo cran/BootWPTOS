@@ -1,0 +1,9 @@
+exportPattern("^[[:alpha:]]+")
+S3method(plot,toswp)
+S3method(summary,toswp)
+S3method(print,toswp)
+importFrom("fractal", "surrogate")
+importFrom("wavethresh", "IsPowerOfTwo", "wpst", "accessD", "wd",
+	"nullevels", "putD", "nlevelsWT")
+importFrom("graphics", "abline", "arrows", "axis", "lines")
+importFrom("stats", "mad", "qnorm", "ts.plot", "var")
