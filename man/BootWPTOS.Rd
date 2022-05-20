@@ -13,7 +13,7 @@
 }
 \usage{
 BootWPTOS(x, levs, indices, filter.number = 1, family = "DaubExPhase",
-	Bsims = 200, lapplyfn = lapply, ret.all = FALSE, s.method = "phase")
+	Bsims = 200, lapplyfn = lapply, ret.all = FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -35,7 +35,7 @@ BootWPTOS(x, levs, indices, filter.number = 1, family = "DaubExPhase",
 }
   \item{lapplyfn}{By default this argument is the \code{lapply} function
 	which operates sequentially. However, if you have the 
-	\code{multicore} package you could supply the \code{mclapply}
+	\pkg{parallel} package you could supply the \code{mclapply}
 	function which processes list elements in parallel on a multicore
 	machines.
 }
@@ -44,11 +44,6 @@ BootWPTOS(x, levs, indices, filter.number = 1, family = "DaubExPhase",
 	object, and can be printed and manipulated by those
 	standard tools. If \code{TRUE} then a list is returned
 	with information about the test.
-}
-  \item{s.method}{This argument is passed to the \code{surrogate}
-	function of the \code{fractal} package as the \code{method}
-	argument. Typically, do not change the default unless you
-	know what you are doing.
 }
 }
 \details{Function computes a test statistic for test of stationarity
@@ -77,7 +72,8 @@ following components:
 \references{
 Cardinali, A. and Nason, G.P. (2016) Practical Powerful Wavelet Packet Tests
         for Second-Order Stationarity. Applied and Computational Harmonic
-        Analysis, 2016, DOI=10.1016/j.acha.2016.06.006.
+        Analysis, 2016
+	\doi{10.1016/j.acha.2016.06.006}
 }
 \author{
 G.P. Nason
@@ -115,7 +111,7 @@ J
 #
 x.test <- BootWPTOS(x=x, levs=c(8,7,7,7), indices=c(1,1,2,3), Bsims=30)
 #
-# Note: Bsims=30 is ALMOST CERTAINLY TOO SMALL (but it is small here because
+# Note: Bsims=30 is almost certainly too small (but it is small here because
 # on installation R run these examples and I don't want it to take too long.
 # 100+ is almost certainly necessary, and probably 500+ useful and 1000+
 # to be "sure". If you can load the multicore library then you can
@@ -144,9 +140,9 @@ x2 <- c(rnorm(256), rnorm(256,sd=1.4))
 # Let's do a test, but involve ALL non-father-wavelet packets from scales
 # 8, 7, 6 and 5.
 #
-\dontrun{x2.test <- BootWPTOS(x=x2, levs=c(8,7,7,7,rep(6,7), rep(5,15)),
-	indices=c(1,1,2,3, 1:7, 1:15), Bsims=30)}
-\dontrun{x2.test}
+x2.test <- BootWPTOS(x=x2, levs=c(8,7,7,7,rep(6,7), rep(5,15)),
+	indices=c(1,1,2,3, 1:7, 1:15), Bsims=30)
+x2.test
 #
 #	WPBootTOS test of stationarity
 #
@@ -155,7 +151,7 @@ x2 <- c(rnorm(256), rnorm(256,sd=1.4))
 #
 # So, strong evidence for nonstationarity because p.value < 0.05 (much less
 # than!). Again here we've only use 30 bootstrap simulations and this is
-# far too small. Using Bsims=1000 and mclapply (for speed) gave a p-value
+# probably too small. Using Bsims=1000 and mclapply (for speed) gave a p-value
 # of 0.002, so still assessed to be nonstationary, but we have more confidence
 # in the answer.
 }

@@ -22,8 +22,8 @@
 \tabular{ll}{
 Package: \tab BootWPTOS\cr
 Type: \tab Package\cr
-Version: \tab 1.0\cr
-Date: \tab 2016-03-30\cr
+Version: \tab 1.2.1\cr
+Date: \tab 2022-05-19\cr
 License: \tab GPL-2\cr
 }
 The main functions are documented above. See below for an example of
@@ -63,15 +63,17 @@ with J=5 then you would use the arguments levs=c(3,4) and indices=c(5,7).
 \author{
 Guy Nason
 
-Maintainer: Who to complain to <g.p.nason@bristol.ac.uk>
+Maintainer: Who to complain to <g.nason@imperial.ac.uk>
 }
 \references{
 Cardinali, A. and Nason, G.P. (2016) Practical Powerful Wavelet Packet Tests
 	for Second-Order Stationarity. Applied and Computational Harmonic
-	Analysis, 2016, DOI=10.1016/j.acha.2016.06.006. 
+	Analysis, 2016, \doi{10.1016/j.acha.2016.06.006}
 
 Von Sachs, R. and Neumann, M.H. (2000) A Wavelet-Based Test for Stationarity.		Journal of Time Series Analysis, 21, 597-613. 
+	\doi{10.1111/1467-9892.00200}
 }
+
 \keyword{ package }
 \keyword{ts}
 \seealso{
@@ -112,7 +114,7 @@ J
 # Let's just look at the finest scale wavelets and the next finest
 # scale wavelets and two other wavelet packets.
 #
-\dontrun{x.test <- BootWPTOS(x=x, levs=c(8,7,7,7), indices=c(1,1,2,3), Bsims=30)}
+x.test <- BootWPTOS(x=x, levs=c(8,7,7,7), indices=c(1,1,2,3), Bsims=30)
 #
 # Note: Bsims=30 is ALMOST CERTAINLY TOO SMALL (but it is small here because
 # on installation R run these examples and I don't want it to take too long.
@@ -122,7 +124,7 @@ J
 #
 # What are the results of our test?
 #
-\dontrun{x.test}
+x.test
 #
 #       WPBootTOS test of stationarity
 #
@@ -143,10 +145,12 @@ x2 <- c(rnorm(256), rnorm(256,sd=1.4))
 # Let's do a test, but involve ALL non-father-wavelet packets from scales
 # 8, 7, 6 and 5.
 #
+# NOTE: Typically we use much more than 50 bootstrap sims
 #
-\dontrun{x2.test <- BootWPTOS(x=x2, levs=c(8,7,7,7,rep(6,7), rep(5,15)),
-	indices=c(1,1,2,3, 1:7, 1:15), Bsims=500)}
-\dontrun{x2.test}
+#
+x2.test <- BootWPTOS(x=x2, levs=c(8,7,7,7,rep(6,7), rep(5,15)),
+	indices=c(1,1,2,3, 1:7, 1:15), Bsims=30)
+x2.test
 #
 #       WPBootTOS test of stationarity
 #
@@ -175,8 +179,10 @@ x2 <- c(rnorm(256), rnorm(256, 2))
 # We've chosen this packet more or less at random. Its packet at scale 5 and
 # index 1 (this happens to be a wavelet)
 #
-\dontrun{x2.tos <- BootWPTOS(x2, levs=5, indices=1, Bsims=500)}
-\dontrun{x2.tos}
+# Again, typically we use more than 30 bootstrap sims, 30 is too small
+#
+x2.tos <- BootWPTOS(x2, levs=5, indices=1, Bsims=30)
+x2.tos
 #
 #       WPBootTOS test of stationarity
 #
@@ -187,8 +193,8 @@ x2 <- c(rnorm(256), rnorm(256, 2))
 #
 # Now let's do the multiple Haar hypothesis test.
 #
-\dontrun{x2.po <- WPTOSpickout(x=x2, level=7, index=1)}
-\dontrun{x2.po}
+x2.po <- WPTOSpickout(x=x2, level=7, index=1)
+x2.po
 #Class 'toswp' : Wavelet Packet Test of Stationarity Object :
 #       ~~~~  : List with 7 components with names
 #              x level index sigcoefs nreject ntests bonsize
@@ -209,7 +215,7 @@ x2 <- c(rnorm(256), rnorm(256, 2))
 #
 # You can plot them also
 #
-\dontrun{plot(x2.po)}
+plot(x2.po)
 #
 # You should get a nice plot of the time series with double-headed red
 # arrows indicating the location and extent of the nonstationarities.

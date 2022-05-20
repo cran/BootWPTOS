@@ -1,1 +1,5 @@
 1.1:	Updated DESCRIPTION file. Minor changes to help files.
+
+1.2.1:	Updated DESCRIPTION file. The fractal package has been archived and
+	so I've switched from using fractal's surrogate function to the one
+	found in the tseries package

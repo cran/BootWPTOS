@@ -91,7 +91,8 @@ components:
 \references{
 Cardinali, A. and Nason, G.P. (2016) Practical Powerful Wavelet Packet Tests
         for Second-Order Stationarity. Applied and Computational Harmonic
-        Analysis, 2016, DOI=10.1016/j.acha.2016.06.006.
+        Analysis, 2016
+	\doi{10.1016/j.acha.2016.06.006}
 }
 \author{
 G.P. Nason
@@ -109,6 +110,8 @@ G.P. Nason
 x2 <- c(rnorm(256), rnorm(256, 2))
 #
 # The following call to BootWPTOS (generic tester) 
+#
+# [We're not running them in R package testing as they can be quite intensive]
 #
 \dontrun{x2.tos <- BootWPTOS(x2, levs=5, indices=1, Bsims=500)}
 \dontrun{x2.tos}
@@ -144,7 +147,7 @@ x2.po
 #
 # You can plot them also
 #
-\dontrun{plot(x2.po)}
+plot(x2.po)
 #
 # You should get a nice plot of the time series with double-headed red
 # arrows indicating the location and extent of the nonstationarities.

@@ -1,5 +1,5 @@
 BootWPTOS <-
-function(x, levs, indices, filter.number=1, family="DaubExPhase", Bsims=200, lapplyfn=lapply, ret.all=FALSE, s.method="phase"){
+function(x, levs, indices, filter.number=1, family="DaubExPhase", Bsims=200, lapplyfn=lapply, ret.all=FALSE){
 
 #
 # Get the name of the data object, x, to be tested
@@ -25,13 +25,13 @@ TS <- WPts(x=x, levs=levs, indices=indices, filter.number=filter.number, family=
 # Create a function to run the bootstrap
 #
 
-bsfn <- function(dummy, x, levs, indices, filter.number, family, s.method) {
+bsfn <- function(dummy, x, levs, indices, filter.number, family) {
 
 	# Note: nothing is done with the dummy argument
 	#
 	# Compute surrogate of time series x
 	#
-	xs <- as.numeric(surrogate(x, method=s.method))
+	xs <- as.numeric(surrogate(x=x, ns=1, fft=TRUE, amplitude=TRUE)) 
 
 	if (any(is.na(x)) || any(is.nan(x)) || any(is.infinite(x)))
 		stop("NA/NaN/Inf found (in bsfn)")
@@ -58,7 +58,7 @@ dummy.ip <- vector("list", Bsims - 1)
 #
 
 ans <- lapplyfn(dummy.ip, bsfn, x=x, levs=levs, indices=indices,
-	filter.number=filter.number, family=family, s.method=s.method)
+	filter.number=filter.number, family=family)
 
 #
 # Convert the answer list to a vector

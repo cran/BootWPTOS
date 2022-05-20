@@ -37,7 +37,8 @@
 \references{
 Cardinali, A. and Nason, G.P. (2016) Practical Powerful Wavelet Packet Tests
         for Second-Order Stationarity. Applied and Computational Harmonic
-        Analysis, 2016, DOI=10.1016/j.acha.2016.06.006.
+        Analysis, 2016.
+	\doi{10.1016/j.acha.2016.06.006}
 }
 \author{
 G.P. Nason
